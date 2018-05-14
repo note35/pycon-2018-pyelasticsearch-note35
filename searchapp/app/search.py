@@ -32,7 +32,7 @@ def search(term: str, count: int) -> List[SearchResult]:
     s = Search(using=client, index=INDEX_NAME, doc_type=DOC_TYPE)
     #name_query = {'match_all': {}}
     name_query = {
-        'term': {
+        'match': {
             'name': term
         }
     }
