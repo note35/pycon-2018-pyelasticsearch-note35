@@ -33,7 +33,10 @@ def search(term: str, count: int) -> List[SearchResult]:
     #name_query = {'match_all': {}}
     name_query = {
         'match': {
-            'name': term
+            'name': {
+                'query': term,
+                'operator': 'and'
+            }
         }
     }
     docs = s.query(name_query)[:count].execute()
