@@ -17,7 +17,9 @@ def main():
         },
     )
 
-    index_product(es, all_products()[0])
+    products = all_products()
+    for product in products: 
+        index_product(es, product)
 
 
 def index_product(es, product: ProductData):
