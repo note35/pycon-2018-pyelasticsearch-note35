@@ -36,7 +36,7 @@ def search(term: str, count: int) -> List[SearchResult]:
             'name': {
                 'query': term,
                 'operator': 'and',
-                'fuzziness': 2
+                'fuzziness': 'AUTO'
             }
         }
     }
