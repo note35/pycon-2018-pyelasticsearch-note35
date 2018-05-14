@@ -1,4 +1,4 @@
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, helpers
 
 from searchapp.constants import DOC_TYPE, INDEX_NAME
 from searchapp.data import all_products, ProductData
@@ -18,8 +18,12 @@ def main():
     )
 
     products = all_products()
+
+    ''' bulk instead of creating one by one
     for product in products: 
         index_product(es, product)
+    '''
+    bulk_index_products(es, products)
 
 
 def index_product(es, product: ProductData):
@@ -38,6 +42,23 @@ def index_product(es, product: ProductData):
     # Don't delete this! You'll need it to see if your indexing job is working,
     # or if it has stalled.
     print("Indexed {}".format(product.name))
+
+
+def bulk_index_products(es, products):
+    def format_bulk_action(product: ProductData):
+        return {
+            '_op_type': 'create',
+            '_index': INDEX_NAME,
+            '_type': DOC_TYPE,
+            '_id': product.id,
+            '_source': {
+                'name': product.name,
+                'image': product.image,
+            }
+        }
+    # this is not efficient, for workshop practice only
+    actions = [format_bulk_action(product) for product in products]
+    helpers.bulk(es, actions)
 
 
 if __name__ == '__main__':
