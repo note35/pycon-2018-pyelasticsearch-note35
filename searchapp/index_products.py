@@ -20,7 +20,7 @@ def main():
                             'fields': {
                                 'english_analyzed': {
                                     'type': 'text',
-                                    'analyzer': 'english',
+                                    'analyzer': 'custom_english_analyzer',
                                 }
                             }
                         }
