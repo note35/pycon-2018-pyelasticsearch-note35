@@ -27,7 +27,16 @@ def main():
                     }
                 }
             },
-            'settings': {},
+            'settings': {
+                'analysis': {
+                    'analyzer': {
+                        'custom_english_analyzer': {
+                            'type': 'english',
+                            'stopwords': ['made', '_english_']
+                        }
+                    }
+                }
+            }
         },
     )
 
