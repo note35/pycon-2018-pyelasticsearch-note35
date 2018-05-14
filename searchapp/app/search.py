@@ -33,7 +33,7 @@ def search(term: str, count: int) -> List[SearchResult]:
     #name_query = {'match_all': {}}
     name_query = {
         'match': {
-            'name.english_analyzed': {
+            'description.english_analyzed': {
                 'query': term,
                 'operator': 'and',
                 'fuzziness': 'AUTO'

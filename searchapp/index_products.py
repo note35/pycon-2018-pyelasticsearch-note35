@@ -23,6 +23,15 @@ def main():
                                     'analyzer': 'custom_english_analyzer',
                                 }
                             }
+                        },
+                        'description': {
+                            'type': 'text',
+                            'fields': {
+                                'english_analyzed': {
+                                    'type': 'text',
+                                    'analyzer': 'custom_english_analyzer',
+                                }
+                            }
                         }
                     }
                 }
@@ -59,6 +68,7 @@ def index_product(es, product: ProductData):
         body={
             "name": product.name,
             "image": product.image,
+            "description": product.description,
         }
     )
 
@@ -77,6 +87,7 @@ def bulk_index_products(es, products):
             '_source': {
                 'name': product.name,
                 'image': product.image,
+                'description': product.description,
             }
         }
     # this is not efficient, for workshop practice only
